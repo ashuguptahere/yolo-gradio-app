@@ -84,7 +84,7 @@ def create_gradio_interface():
             value="yolo11s",
         )
 
-        epochs = gr.Slider(minimum=1, maximum=100, label="Number of Epochs", value=100, step=1)
+        epochs = gr.Slider(minimum=1, maximum=100, label="Number of Epochs", value=1000, step=1)
         img_size = gr.Slider(minimum=320, maximum=1280, label="Image Size", value=640, step=1)
         batch_size = gr.Slider(minimum=1, maximum=64, label="Batch Size", value=16, step=1)
 
