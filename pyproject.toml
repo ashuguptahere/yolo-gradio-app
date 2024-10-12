@@ -1,42 +1,19 @@
-[tool.poetry]
+[project]
 name = "yolo-gradio-app"
 version = "0.1.0"
-description = ""
-authors = ["Aashish Gupta <ashuguptahere@gmail.com>"]
+description = "Training YOLO models from Gradio WebUI"
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "gradio>=5.0.2",
+    "uvicorn>=0.31.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-fastapi = "^0.115.0"
-gradio = "^4.44.0"
-ultralytics = "^8.2.103"
-uvicorn = "^0.31.0"
-
-[tool.poetry.group.cuda]
-optional = true
-
-[tool.poetry.group.cuda.dependencies]
-torch = { version = "^2.4.1", source = "pytorch-cuda", markers = "extra=='cuda' and extra!='cpu'" }
-torchaudio = { version = "^2.4.1", source = "pytorch-cuda", markers = "extra=='cuda' and extra!='cpu'" }
-torchvision = { version = "^0.19.1", source = "pytorch-cuda", markers = "extra=='cuda' and extra!='cpu'" }
-
-[tool.poetry.extras]
-cpu = ["torch", "torchvision"]
-cuda = ["torch", "torchvision"]
-
-[[tool.poetry.source]]
-name = "pytorch-cuda"
-priority = "explicit"
-url = "https://download.pytorch.org/whl/cu118"
-
-[[tool.poetry.source]]
-name = "pytorch-cpu"
-priority = "explicit"
-url = "https://download.pytorch.org/whl/cpu"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-app = "yolo_gradio_app.app:main"
+[project.optional-dependencies]
+build = [
+    "torch>=2.4.1",
+    "torchaudio>=2.4.1",
+    "torchvision>=0.19.1",
+    "ultralytics>=8.3.7",
+]

@@ -8,7 +8,7 @@ app = FastAPI()
 
 # Function to train YOLO model
 def train_yolo(
-    data_path, model_choice="yolov8s", epochs=10, img_size=640, batch_size=16
+    data_path, model_choice="yolo11s", epochs=10, img_size=640, batch_size=16
 ):
     if not os.path.exists(data_path):
         return "Error: The specified data file path does not exist."
@@ -34,23 +34,23 @@ def create_gradio_interface():
             lines=1,
         )
 
-        train_data_path = gr.Textbox(
-            label="Enter Train Data Path",
-            placeholder="/path/to/train/folder",
-            lines=1,
-        )
+        # train_data_path = gr.Textbox(
+        #     label="Enter Train Data Path",
+        #     placeholder="/path/to/train/folder",
+        #     lines=1,
+        # )
 
-        test_data_path = gr.Textbox(
-            label="Enter Test Data Path",
-            placeholder="/path/to/test/folder",
-            lines=1,
-        )
+        # test_data_path = gr.Textbox(
+        #     label="Enter Test Data Path",
+        #     placeholder="/path/to/test/folder",
+        #     lines=1,
+        # )
 
-        val_data_path = gr.Textbox(
-            label="Enter Val Data Path",
-            placeholder="/path/to/val/folder",
-            lines=1,
-        )
+        # val_data_path = gr.Textbox(
+        #     label="Enter Val Data Path",
+        #     placeholder="/path/to/val/folder",
+        #     lines=1,
+        # )
 
         model_choice = gr.Dropdown(
             choices=[
@@ -64,13 +64,29 @@ def create_gradio_interface():
                 "yolov8m",
                 "yolov8l",
                 "yolov8x",
+                "yolov9n",
+                "yolov9s",
+                "yolov9m",
+                "yolov9l",
+                "yolov9x",
+                "yolov10n",
+                "yolov10s",
+                "yolov10m",
+                "yolov10l",
+                "yolov10x",
+                "yolo11n",
+                "yolo11s",
+                "yolo11m",
+                "yolo11l",
+                "yolo11x",
             ],
             label="Select Model",
-            value="yolov8s",
+            value="yolo11s",
         )
-        epochs = gr.Slider(minimum=1, maximum=100, label="Number of Epochs", value=10)
-        img_size = gr.Slider(minimum=320, maximum=1280, label="Image Size", value=640)
-        batch_size = gr.Slider(minimum=1, maximum=64, label="Batch Size", value=16)
+
+        epochs = gr.Slider(minimum=1, maximum=100, label="Number of Epochs", value=100, step=1)
+        img_size = gr.Slider(minimum=320, maximum=1280, label="Image Size", value=640, step=1)
+        batch_size = gr.Slider(minimum=1, maximum=64, label="Batch Size", value=16, step=1)
 
         # Output field
         output_text = gr.Textbox(label="Training Output")
